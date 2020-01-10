@@ -21,12 +21,10 @@ app.get('/api/stories/:username', (req, res) => {
     StoryService.getStories(userId).then(stories => {
       res.json(withData(stories));
     }).catch(error => {
-      res.status(404);
-      res.json(withErrorMessage(error))
+      res.status(404).json(withErrorMessage(error));
     });
   })).catch(error => {
-    res.status(404);
-    res.json(withErrorMessage(error))
+    res.status(404).json(withErrorMessage(error));
   });
 });
 
