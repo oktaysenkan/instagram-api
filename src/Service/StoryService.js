@@ -28,7 +28,7 @@ class StoryService {
             owner: {
               username: data.owner.username,
               id: data.owner.id,
-              picture_url: data.owner.profile_pic_url,
+              pictureUrl: data.owner.profile_pic_url,
             },
             stories: []
           };
