@@ -27,9 +27,9 @@ app.get('/api/users/:username/stories', (req, res) => {
   const username = req.params.username;
   UserService.getUser(username).then((user => {
     if (user.isPrivate) {
-      res.status(400).json({
+      res.status(401).json({
         message: 'This account is private!',
-        status: 400,
+        status: 401,
       });
     } else {
       StoryService.getStories(user.id).then(stories => {
