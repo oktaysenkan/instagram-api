@@ -37,7 +37,7 @@ class StoryService {
             stories.stories.push({
               type: story.is_video ? 'video' : 'image',
               publishingDate: story.taken_at_timestamp,
-              url: story.display_url,
+              url: story.is_video ? story.video_resources[story.video_resources.length - 1].src : story.display_url,
             });
           });
           resolve(stories);
