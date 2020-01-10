@@ -8,7 +8,7 @@ class UserService {
         if (users.length > 0) {
           resolve(users[0].user.pk);
         } else {
-          reject('User cannot found!');
+          reject('User not found!');
         }
       });
     })

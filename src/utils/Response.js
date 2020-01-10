@@ -4,10 +4,10 @@ export const withErrorMessage = (message) => {
       message: message
     }
   }
-}
+};
 
 export const withData = (data) => {
   return {
     data: data
   }
-}
+};

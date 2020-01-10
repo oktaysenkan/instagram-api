@@ -7,7 +7,7 @@ class StoryService {
 
       if (!process.env.SESSION_ID) {
         reject('Session ID not found in .env file.');
-      }
+      };
 
       const headers = {
         'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ class StoryService {
       request(options, (error, response, body) => {
         let data = JSON.parse(body).data.reels_media;
         if (data.length > 0) {
-          data = data[0]
+          data = data[0];
           const stories = {
             owner: {
               username: data.owner.username,
@@ -31,18 +31,18 @@ class StoryService {
               picture_url: data.owner.profile_pic_url,
             },
             stories: []
-          }
+          };
 
           data.items.map(story => {
             stories.stories.push({
               type: story.is_video ? 'video' : 'image',
               publishingDate: story.taken_at_timestamp,
               url: story.display_url,
-            })
-          })
+            });
+          });
           resolve(stories);
         } else {
-          reject('Story not found!');
+          reject('Story not found or this account is private!');
         }
       });
     })
