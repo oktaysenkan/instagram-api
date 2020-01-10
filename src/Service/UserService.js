@@ -1,7 +1,7 @@
 const request = require('request');
 
 class UserService {
-  static  getUserIdByUsername = (username) => {
+  static  getUserId = (username) => {
     return new Promise((resolve, reject) => {
       request(`https://www.instagram.com/web/search/topsearch/?context=user&count=0&query=${username}`, (error, response, body) => {
         const {users} = JSON.parse(body);

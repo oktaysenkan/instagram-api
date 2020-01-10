@@ -1,26 +1,12 @@
-import UserService from './src/Service/UserService'
-const request = require('request');
-require('dotenv').config()
+import UserService from './src/Service/UserService';
+import StoryService from './src/Service/StoryService';
 
-const userId = 301557358;
-const headers = {
-  'Content-Type': 'application/json',
-  'Cookie': `sessionid=${process.env.SESSION_ID};`
-};
-const options = {
-  url: `https://www.instagram.com/graphql/query/?query_hash=52a36e788a02a3c612742ed5146f1676&variables={"reel_ids":["${userId}"],"precomposed_overlay":false}`,
-  method: 'GET',
-  headers: headers
-};
-
-UserService.getUserIdByUsername('oktaysenkan').then((userId => {
-  console.log(userId);
-  request(options, (error, response, body) => {
-    console.log(body);
-    console.log(response.statusCode);
+UserService.getUserId('galatasaray').then((userId => {
+  StoryService.getStories(userId).then(stories => {
+    console.log(stories);
+  }).catch(error => {
+    console.log(error);
   });
 })).catch(error => {
   console.log(error);
 });
-
-
