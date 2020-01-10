@@ -1,6 +1,5 @@
 import UserService from './src/Service/UserService';
 import StoryService from './src/Service/StoryService';
-import {withData, withErrorMessage} from './src/utils/Response';
 
 const express = require('express');
 const app = express();
@@ -15,20 +14,36 @@ app.get('/', (req, res) => {
   });
 });
 
-app.get('/api/stories/:username', (req, res) => {
+app.get('/api/users/:username', (req, res) => {
   const username = req.params.username;
-  UserService.getUserId(username).then((userId => {
-    StoryService.getStories(userId).then(stories => {
-      res.json(withData(stories));
-    }).catch(error => {
-      res.status(404).json(withErrorMessage(error));
-    });
+  UserService.getUser(username).then((user => {
+    res.json(user);
   })).catch(error => {
-    res.status(404).json(withErrorMessage(error));
+    res.status(error.status).json(error);
+  });
+});
+
+app.get('/api/users/:username/stories', (req, res) => {
+  const username = req.params.username;
+  UserService.getUser(username).then((user => {
+    if (user.isPrivate) {
+      res.status(400).json({
+        message: 'This account is private!',
+        status: 400,
+      });
+    } else {
+      StoryService.getStories(user.id).then(stories => {
+        res.json(stories);
+      }).catch(error => {
+        res.status(error.status).json(error);
+      });
+    }
+  })).catch(error => {
+    res.status(error.status).json(error);
   });
 });
 
 app.listen(port, () => {
-  console.log(`Listening on port ${port}!`);
+  console.log(`Listening on port http://localhost:${port} !`);
 });
 

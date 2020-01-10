@@ -13,33 +13,38 @@ Private NodeJS Instagram story API server.
     "owner": {
       "username": "msaistanbul",
       "id": "37473657",
-      "picture_url": "https://scontent-hkg3-2.cdninstagram.com/v/t51.2885-19/11881767_743326829127820_1373246811_a.jpg?_nc_ht=scontent-hkg3-2.cdninstagram.com&_nc_ohc=ekxa6S7v674AX9MlJDh&oh=4bde90b3a0f9230d8ffbe03b1de38763&oe=5EA46FF5"
+      "pictureUrl": "https://instagram.fist7-2.fna.fbcdn.net/v/t51.2885-19/11881767_743326829127820_1373246811_a.jpg?_nc_ht=instagram.fist7-2.fna.fbcdn.net&_nc_ohc=hC4yoDhM3IgAX8jHkUI&oh=ff29c79d025b0498a6627944834a6ea8&oe=5EA46FF5"
     },
     "stories": [
       {
         "type": "image",
-        "publishingDate": 1578560534,
-        "url": "https://scontent-hkg3-2.cdninstagram.com/v/t51.12442-15/e35/79378287_118437392724768_3427251054296550072_n.jpg?_nc_ht=scontent-hkg3-2.cdninstagram.com&_nc_cat=100&_nc_ohc=103GwSPzp3cAX-kDOPF&oh=c09ffee6d0c4dbd922c242603ba33d15&oe=5E1ADD40"
-      },
-      {
-        "type": "image",
-        "publishingDate": 1578560546,
-        "url": "https://scontent-hkg3-2.cdninstagram.com/v/t51.12442-15/e35/80062721_513199802633511_4307817043011563537_n.jpg?_nc_ht=scontent-hkg3-2.cdninstagram.com&_nc_cat=103&_nc_ohc=ZUOvkk3kyKsAX_JshPw&oh=335007cc12741c1b64f8b580656cd240&oe=5E1AF9F0"
-      },
-      {
-        "type": "image",
-        "publishingDate": 1578560622,
-        "url": "https://scontent-hkg3-2.cdninstagram.com/v/t51.12442-15/e35/79588024_194092521768191_3374032076697267910_n.jpg?_nc_ht=scontent-hkg3-2.cdninstagram.com&_nc_cat=111&_nc_ohc=NPXMSyxaGRwAX_vrjqA&oh=8b1ef46229175ea1e257fe441f015ebb&oe=5E1A7670"
-      },
-      {
-        "type": "image",
         "publishingDate": 1578641402,
-        "url": "https://scontent-hkg3-2.cdninstagram.com/v/t51.12442-15/e35/p1080x1080/79600067_178979433175325_4091119800229507224_n.jpg?_nc_ht=scontent-hkg3-2.cdninstagram.com&_nc_cat=105&_nc_ohc=O3Yw8mfD3FkAX-QlN76&oh=06f872a74a84bbd0eed76f8a4bec1cb2&oe=5E1A6F4F"
+        "url": "https://instagram.fist7-2.fna.fbcdn.net/v/t51.12442-15/e35/p1080x1080/79600067_178979433175325_4091119800229507224_n.jpg?_nc_ht=instagram.fist7-2.fna.fbcdn.net&_nc_cat=105&_nc_ohc=O3Yw8mfD3FkAX8rxX4p&oh=b0e009ef6c70720427db337d05c63c64&oe=5E1B180F"
       },
       {
         "type": "video",
         "publishingDate": 1578641557,
-        "url": "https://scontent-hkg3-2.cdninstagram.com/v/t51.12442-15/e35/82566915_624219808338702_7133025603475246711_n.jpg?_nc_ht=scontent-hkg3-2.cdninstagram.com&_nc_cat=106&_nc_ohc=q9pAKWFWCNoAX92l_7O&oh=eba5a9f599f02a2ee6e6c5ba0cd4e3b4&oe=5E1AB343"
+        "url": "https://instagram.fist7-2.fna.fbcdn.net/v/t50.12441-16/82631069_216843475974100_4583083238131297029_n.mp4?_nc_ht=instagram.fist7-2.fna.fbcdn.net&_nc_cat=104&_nc_ohc=YFQd7cDEaJkAX_UOQkl&oe=5E1B4640&oh=95c17794991d0ddb86b689c672a08d1e"
+      },
+      {
+        "type": "video",
+        "publishingDate": 1578648614,
+        "url": "https://instagram.fist7-2.fna.fbcdn.net/v/t50.12441-16/83117148_1501392399984542_3606743366048324393_n.mp4?_nc_ht=instagram.fist7-2.fna.fbcdn.net&_nc_cat=102&_nc_ohc=Txl_6bHl5PkAX8Sxoq5&oe=5E1B6B30&oh=2f7a0ced067e8c2790c0c155cd8fd8f4"
+      },
+      {
+        "type": "video",
+        "publishingDate": 1578655575,
+        "url": "https://instagram.fist7-1.fna.fbcdn.net/v/t50.12441-16/82443423_2642985659126266_3730551967180099103_n.mp4?_nc_ht=instagram.fist7-1.fna.fbcdn.net&_nc_cat=110&_nc_ohc=4C0BQnZfEBMAX8yVgrS&oe=5E1B3A57&oh=fd1fa3d068eaed17f34ddc5fa0579032"
+      },
+      {
+        "type": "image",
+        "publishingDate": 1578665222,
+        "url": "https://instagram.fist7-1.fna.fbcdn.net/v/t51.12442-15/e35/80338838_105072424285171_2752360313409122542_n.jpg?_nc_ht=instagram.fist7-1.fna.fbcdn.net&_nc_cat=107&_nc_ohc=EfNV2XQtJQIAX9cpEBD&oh=99a54edfac0224128c9f3e632621bdbb&oe=5E1B4866"
+      },
+      {
+        "type": "image",
+        "publishingDate": 1578665271,
+        "url": "https://instagram.fist7-2.fna.fbcdn.net/v/t51.12442-15/e35/81985693_2502492353194836_3104348712482872447_n.jpg?_nc_ht=instagram.fist7-2.fna.fbcdn.net&_nc_cat=100&_nc_ohc=Kqxu5EJjZlQAX8APlAO&oh=1117f25fcf4c61b86add340b0bbefd3f&oe=5E1BA9C2"
       }
     ]
   }
