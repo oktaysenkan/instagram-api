@@ -88,3 +88,10 @@ Private NodeJS Instagram story API server.
   "status": 401
 }
 ```
+
+```json
+{
+  "message": "Story not found!",
+  "status": 404
+}
+```

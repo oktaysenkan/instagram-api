@@ -1,18 +1,12 @@
 const request = require('request');
-require('dotenv').config();
+import { SESSION_ID } from '../../config'
 
 class StoryService {
   static  getStories = (userId) => {
     return new Promise((resolve, reject) => {
-      if (!process.env.SESSION_ID) {
-        reject({
-          message: 'Session ID not found in .env file.',
-          status: 500,
-        });
-      };
       const headers = {
         'Content-Type': 'application/json',
-        'Cookie': `sessionid=${process.env.SESSION_ID};`
+        'Cookie': `sessionid=${SESSION_ID};`
       };
       const options = {
         url: `https://www.instagram.com/graphql/query/?query_hash=52a36e788a02a3c612742ed5146f1676&variables={"reel_ids":["${userId}"],"precomposed_overlay":false}`,

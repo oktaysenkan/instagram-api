@@ -1,15 +1,16 @@
 import UserService from './src/Service/UserService';
 import StoryService from './src/Service/StoryService';
+import { PORT } from './config'
 
 const express = require('express');
 const app = express();
 app.disable('etag');
-const port = 3000;
 
 app.get('/', (req, res) => {
   res.json({
     'endpoints': [
-      "api/stories/{username}",
+      "api/users/{username}",
+      "api/users/{username}/stories",
     ]
   });
 });
@@ -43,7 +44,7 @@ app.get('/api/users/:username/stories', (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Listening on port http://localhost:${port} !`);
+app.listen(PORT, () => {
+  console.log(`Listening on http://localhost:${PORT}`);
 });
 
