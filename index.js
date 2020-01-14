@@ -18,7 +18,20 @@ app.get('/', (req, res) => {
 app.get('/api/users/:username', (req, res) => {
   const username = req.params.username;
   UserService.getUser(username).then((user => {
-    res.json(user);
+    res.json(user)
+  })).catch(error => {
+    res.status(error.status).json(error);
+  });
+});
+
+app.get('/api/users/:username/profile', (req, res) => {
+  const username = req.params.username;
+  UserService.getUser(username).then((user => {
+    UserService.getProfile(user.id).then(test => {
+      res.json(test);
+    }).catch(error => {
+      res.json(error)
+    })
   })).catch(error => {
     res.status(error.status).json(error);
   });
