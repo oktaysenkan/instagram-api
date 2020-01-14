@@ -1,5 +1,4 @@
-import UserService from './src/Service/UserService';
-import StoryService from './src/Service/StoryService';
+import {UserService, StoryService, HighlightService, PostService} from './src/Service';
 import { PORT } from './config'
 
 const express = require('express');
@@ -11,6 +10,10 @@ app.get('/', (req, res) => {
     'endpoints': [
       "api/users/{username}",
       "api/users/{username}/stories",
+      "api/users/{username}/profile",
+      "api/users/{username}/highlights",
+      "api/users/{username}/posts",
+      "api/highlights/{highlightedId}",
     ]
   });
 });
@@ -66,9 +69,10 @@ app.get('/api/users/:username/highlights', (req, res) => {
         status: 401,
       });
     } else {
-      UserService.getHighlights(user.id).then(highlights => {
+      HighlightService.getHighlights(user.id).then(highlights => {
         res.json(highlights);
       }).catch(error => {
+        console.log(error);
         res.status(error.status).json(error);
       });
     }
@@ -79,7 +83,7 @@ app.get('/api/users/:username/highlights', (req, res) => {
 
 app.get('/api/highlights/:highlightedId', (req, res) => {
   const highlightedId = req.params.highlightedId;
-  StoryService.getHightlightedStories(highlightedId).then((highlights => {
+  HighlightService.getHightlightedStories(highlightedId).then((highlights => {
     res.json(highlights);
   })).catch(error => {
     res.status(error.status).json(error);
@@ -95,7 +99,7 @@ app.get('/api/users/:username/posts', (req, res) => {
         status: 401,
       });
     } else {
-      UserService.getUserPosts(user).then(posts => {
+      PostService.getUserPosts(user).then(posts => {
         res.json(posts);
       }).catch(error => {
         res.status(error.status).json(error);
