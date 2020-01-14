@@ -40,7 +40,6 @@ class UserService {
       };
       request(options, (error, response, body) => {
         let data = JSON.parse(body).user;
-        console.log(data, 'test');
         if (data) {
           const user = {
             id: userId,
@@ -59,6 +58,43 @@ class UserService {
         } else {
           reject({
             message: 'User not found!',
+            status: 404,
+          });
+        }
+      });
+    })
+  }
+
+  static getHighlights(userId) {
+    return new Promise((resolve, reject) => {
+      const headers = {
+        'Content-Type': 'application/json',
+        'User-Agent': USER_AGENT,
+        'Cookie': `sessionid=${SESSION_ID};`
+      };
+      const options = {
+        url: `https://www.instagram.com/graphql/query/?query_hash=c9100bf9110dd6361671f113dd02e7d6&variables={"user_id":"${userId}","include_highlight_reels":true}`, 
+        method: 'GET',
+        headers: headers
+      };
+      request(options, (error, response, body) => {
+        let data = JSON.parse(body).data.user.edge_highlight_reels.edges;
+        if (data.length > 0) {
+          const highlights = [];
+          data.map(({node}) => {
+            highlights.push({
+              id: node.id,
+              title: node.title,
+              pictureUrl: node.cover_media_cropped_thumbnail.url,
+              pictureUrlHD: node.cover_media.thumbnail_src,
+            })
+          })
+          resolve({
+            highlights: highlights
+          });
+        } else {
+          reject({
+            message: 'Highlight not found!',
             status: 404,
           });
         }
