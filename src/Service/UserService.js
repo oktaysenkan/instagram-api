@@ -19,6 +19,7 @@ class UserService {
               profile: `${BASE_URL}/api/users/${user.user.username}/profile`,
               highlights: `${BASE_URL}/api/users/${user.user.username}/highlights`,
               stories: `${BASE_URL}/api/users/${user.user.username}/stories`,
+              posts: `${BASE_URL}/api/users/${user.user.username}/posts`,
             }
           });
         } else {
@@ -61,6 +62,7 @@ class UserService {
             urls: {
               highlights: `${BASE_URL}/api/users/${data.username}/highlights`,
               stories: `${BASE_URL}/api/users/${data.username}/stories`,
+              posts: `${BASE_URL}/api/users/${data.username}/posts`,
             },
           };
           resolve(user);
@@ -82,31 +84,92 @@ class UserService {
         'Cookie': `sessionid=${SESSION_ID};`
       };
       const options = {
-        url: `https://www.instagram.com/graphql/query/?query_hash=c9100bf9110dd6361671f113dd02e7d6&variables={"user_id":"${userId}","include_highlight_reels":true}`, 
+        url: `https://www.instagram.com/graphql/query/?query_hash=c9100bf9110dd6361671f113dd02e7d6&variables={"user_id":"${userId}","include_highlight_reels":true,"include_reel":true}`, 
         method: 'GET',
         headers: headers
       };
       request(options, (error, response, body) => {
         let data = JSON.parse(body).data.user.edge_highlight_reels.edges;
+        let owner = JSON.parse(body).data.user.reel.owner;
+
         if (data.length > 0) {
-          const highlights = [];
+          const highlights = {
+            owner: {
+              id: owner.id,
+              username: owner.username,
+              pictureUrl: owner.profile_pic_url,
+            },
+            highlights: [],
+            urls: {
+              profile: `${BASE_URL}/api/users/${owner.username}/profile`,
+              highlights: data.map(({node}) => {
+                return `${BASE_URL}/api/highlights/${node.id}`
+              })
+            }
+          };
           data.map(({node}) => {
-            highlights.push({
+            highlights.highlights.push({
               id: node.id,
               title: node.title,
               pictureUrl: node.cover_media_cropped_thumbnail.url,
               pictureUrlHD: node.cover_media.thumbnail_src,
-              urls: {
-                highlight: `${BASE_URL}/api/highlights/${node.id}`,
-              }
             })
           })
-          resolve({
-            highlights: highlights
-          });
+          resolve(highlights);
         } else {
           reject({
             message: 'Highlight not found!',
+            status: 404,
+          });
+        }
+      });
+    })
+  }
+
+  static getUserPosts(user) {
+    return new Promise((resolve, reject) => {
+      const headers = {
+        'Content-Type': 'application/json',
+        'User-Agent': USER_AGENT,
+        'Cookie': `sessionid=${SESSION_ID};`
+      };
+      const options = {
+        url: `https://www.instagram.com/graphql/query/?query_hash=e769aa130647d2354c40ea6a439bfc08&variables={"id":"${user.id}","first":100}`, 
+        method: 'GET',
+        headers: headers
+      };
+      request(options, (error, response, body) => {
+        let data = JSON.parse(body).data.user.edge_owner_to_timeline_media.edges;
+        if (data.length > 0) {
+          const posts = {
+            owner: {
+              id: user.id,
+              username: user.username,
+              pictureUrl: user.pictureUrl,
+            },
+            posts: [],
+            urls: {
+              profile: `${BASE_URL}/api/users/${user.username}/profile`,
+            }
+          }
+          data.map(({node}) => {
+            const caption = node.edge_media_to_caption.edges.length > 0 && node.edge_media_to_caption.edges[0].node.text;
+            posts.posts.push({
+              type: node.is_video ? 'video' : 'image',
+              displayUrl: node.display_url,
+              publishingDate: node.taken_at_timestamp,
+              videoUrl: node.video_url && node.video_url,
+              caption: caption,
+              publishingDate: node.taken_at_timestamp,
+              location: node.location && node.location.name,
+              preview: node.is_video ? node.edge_media_preview_like.count : null,
+              like: !node.is_video ? node.edge_media_preview_like.count : null,
+            });
+          });
+          resolve(posts);
+        } else {
+          reject({
+            message: 'Post not found!',
             status: 404,
           });
         }

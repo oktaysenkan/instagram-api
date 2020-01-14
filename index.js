@@ -79,8 +79,28 @@ app.get('/api/users/:username/highlights', (req, res) => {
 
 app.get('/api/highlights/:highlightedId', (req, res) => {
   const highlightedId = req.params.highlightedId;
-  StoryService.getHightlightedStories(highlightedId).then((stories => {
-    res.json(stories);
+  StoryService.getHightlightedStories(highlightedId).then((highlights => {
+    res.json(highlights);
+  })).catch(error => {
+    res.status(error.status).json(error);
+  });
+});
+
+app.get('/api/users/:username/posts', (req, res) => {
+  const username = req.params.username;
+  UserService.getUser(username).then((user => {
+    if (user.isPrivate) {
+      res.status(401).json({
+        message: 'This account is private!',
+        status: 401,
+      });
+    } else {
+      UserService.getUserPosts(user).then(posts => {
+        res.json(posts);
+      }).catch(error => {
+        res.status(error.status).json(error);
+      });
+    }
   })).catch(error => {
     res.status(error.status).json(error);
   });
