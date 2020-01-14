@@ -1,5 +1,5 @@
 const request = require('request');
-import { SESSION_ID } from '../../config'
+import { SESSION_ID, BASE_URL } from '../../config'
 
 class StoryService {
   static getStories = (userId) => {
@@ -22,7 +22,10 @@ class StoryService {
               id: data.owner.id,
               pictureUrl: data.owner.profile_pic_url,
             },
-            stories: []
+            stories: [],
+            urls: {
+              user: `${BASE_URL}/api/users/${data.owner.username}`,
+            }
           };
           data.items.map(story => {
             stories.stories.push({
@@ -62,7 +65,10 @@ class StoryService {
               id: data.owner.id,
               pictureUrl: data.owner.profile_pic_url,
             },
-            stories: []
+            stories: [],
+            urls: {
+              user: `${BASE_URL}/api/users/${data.owner.username}`,
+            }
           };
           data.items.map(story => {
             stories.stories.push({

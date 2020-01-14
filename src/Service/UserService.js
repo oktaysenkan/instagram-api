@@ -1,5 +1,5 @@
 const request = require('request');
-import { USER_AGENT, SESSION_ID } from '../../config'
+import { USER_AGENT, SESSION_ID, BASE_URL } from '../../config'
 
 
 class UserService {
@@ -15,6 +15,11 @@ class UserService {
             isPrivate: user.user.is_private,
             pictureUrl: user.user.profile_pic_url,
             isVerified: user.user.is_verified,
+            urls: {
+              profile: `${BASE_URL}/api/users/${user.user.username}/profile`,
+              highlights: `${BASE_URL}/api/users/${user.user.username}/highlights`,
+              stories: `${BASE_URL}/api/users/${user.user.username}/stories`,
+            }
           });
         } else {
           reject({
@@ -53,6 +58,10 @@ class UserService {
             biography: data.biography,
             pictureUrl: data.profile_pic_url,
             pictureUrlHD: data.hd_profile_pic_url_info.url,
+            urls: {
+              highlights: `${BASE_URL}/api/users/${data.username}/highlights`,
+              stories: `${BASE_URL}/api/users/${data.username}/stories`,
+            },
           };
           resolve(user);
         } else {
@@ -87,6 +96,9 @@ class UserService {
               title: node.title,
               pictureUrl: node.cover_media_cropped_thumbnail.url,
               pictureUrlHD: node.cover_media.thumbnail_src,
+              urls: {
+                highlight: `${BASE_URL}/api/highlights/${node.id}`,
+              }
             })
           })
           resolve({
