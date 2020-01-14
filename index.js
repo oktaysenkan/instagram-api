@@ -77,6 +77,15 @@ app.get('/api/users/:username/highlights', (req, res) => {
   });
 });
 
+app.get('/api/highlights/:highlightedId', (req, res) => {
+  const highlightedId = req.params.highlightedId;
+  StoryService.getHightlightedStories(highlightedId).then((stories => {
+    res.json(stories);
+  })).catch(error => {
+    res.status(error.status).json(error);
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Listening on http://localhost:${PORT}`);
 });
