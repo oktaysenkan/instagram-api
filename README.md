@@ -1,5 +1,5 @@
 # Instagram API
-Private Instagram API library, writen by JavaScript.
+Private Instagram API library, no required any API token or login credentials.
 
 ## Usage
 
