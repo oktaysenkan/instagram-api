@@ -64,8 +64,9 @@ class HighlightService {
         headers: headers
       };
       request(options, (error, response, body) => {
-        let data = JSON.parse(body).data.reels_media[0];
+        let data = JSON.parse(body).data.reels_media;
         if (data) {
+          data = data[0];
           const highlights = {
             owner: {
               username: data.owner.username,

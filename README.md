@@ -241,3 +241,41 @@ Private Instagram API library, writen by JavaScript.
   "status": 404
 }
 ```
+
+`GET api/highlights/{highlightedId}`
+
+#### Response
+
+```json
+{
+  "owner": {
+    "username": "msaistanbul",
+    "id": "37473657",
+    "pictureUrl": "https://scontent-lhr3-1.cdninstagram.com/v/t51.2885-19/11881767_743326829127820_1373246811_a.jpg?_nc_ht=scontent-lhr3-1.cdninstagram.com&_nc_ohc=7t0KEQp8ODUAX8hxQ5t&oh=060b0f481c566ffdfdf8e901036bf708&oe=5EA46FF5"
+  },
+  "highlights": [
+    {
+      "type": "video",
+      "publishingDate": 1578648614,
+      "url": "https://scontent-lhr3-1.cdninstagram.com/v/t50.12441-16/83117148_1501392399984542_3606743366048324393_n.mp4?_nc_ht=scontent-lhr3-1.cdninstagram.com&_nc_cat=102&_nc_ohc=hwxC3-eIne8AX_FDM5O&oe=5E235430&oh=e04fc56d31b357044a8bd93afd47e6bd"
+    },
+    {
+      "type": "video",
+      "publishingDate": 1578050618,
+      "url": "https://scontent-lhr3-1.cdninstagram.com/v/t50.12441-16/82412385_108576937200605_2584661019537851257_n.mp4?_nc_ht=scontent-lhr3-1.cdninstagram.com&_nc_cat=105&_nc_ohc=-Ir_0RhdlXoAX97jsHz&oe=5E234357&oh=8da47b7c1b8985da3833f5cc8fb963c5"
+    }
+  ],
+  "urls": {
+    "user": "http://47.254.156.197:3000/api/users/msaistanbul"
+  }
+}
+```
+
+#### Error Messages
+
+```json
+{
+  "message": "Highlight not found!",
+  "status": 404
+}
+```
