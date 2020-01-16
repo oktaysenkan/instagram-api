@@ -66,28 +66,28 @@ class HighlightService {
       request(options, (error, response, body) => {
         let data = JSON.parse(body).data.reels_media[0];
         if (data) {
-          const stories = {
+          const highlights = {
             owner: {
               username: data.owner.username,
               id: data.owner.id,
               pictureUrl: data.owner.profile_pic_url,
             },
-            stories: [],
+            highlights: [],
             urls: {
               user: `${BASE_URL}/api/users/${data.owner.username}`,
             }
           };
           data.items.map(story => {
-            stories.stories.push({
+            highlights.highlights.push({
               type: story.is_video ? 'video' : 'image',
               publishingDate: story.taken_at_timestamp,
               url: story.is_video ? story.video_resources[story.video_resources.length - 1].src : story.display_url,
             });
           });
-          resolve(stories);
+          resolve(highlights);
         } else {
           reject({
-            message: 'Story not found!',
+            message: 'Highlight not found!',
             status: 404,
           });
         }
