@@ -46,7 +46,6 @@ class UserService {
       };
       request(options, (error, response, body) => {
         let data = JSON.parse(body).user;
-        console.log(data);
         if (data) {
           const user = {
             id: userId,
@@ -55,7 +54,7 @@ class UserService {
             isPrivate: data.is_private,
             isVerified: data.is_verified,
             category: data.category,
-            media_count: data.media_count,
+            mediaCount: data.media_count,
             followerCount: data.follower_count,
             followingCount: data.following_count,
             biography: data.biography,
