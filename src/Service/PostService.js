@@ -36,7 +36,7 @@ class PostService {
               displayUrl: node.display_url,
               publishingDate: node.taken_at_timestamp,
               videoUrl: node.video_url && node.video_url,
-              caption: caption,
+              caption: caption ? caption : null,
               publishingDate: node.taken_at_timestamp,
               location: node.location && node.location.name,
               preview: node.is_video ? node.edge_media_preview_like.count : null,
