@@ -266,7 +266,7 @@ Private Instagram API library, no required any API token or login credentials.
     }
   ],
   "urls": {
-    "user": "http://47.254.156.197:3000/api/users/msaistanbul"
+    "user": "http://localhost:3000/api/users/msaistanbul"
   }
 }
 ```
