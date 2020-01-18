@@ -2,7 +2,7 @@ const request = require('request');
 import { USER_AGENT, SESSION_ID, BASE_URL } from '../../config'
 
 class PostService {
-  static getUserPosts(user) {
+  static getUserPosts(user, limit) {
     return new Promise((resolve, reject) => {
       const headers = {
         'Content-Type': 'application/json',
@@ -10,7 +10,7 @@ class PostService {
         'Cookie': `sessionid=${SESSION_ID};`
       };
       const options = {
-        url: `https://www.instagram.com/graphql/query/?query_hash=e769aa130647d2354c40ea6a439bfc08&variables={"id":"${user.id}","first":100}`, 
+        url: `https://www.instagram.com/graphql/query/?query_hash=e769aa130647d2354c40ea6a439bfc08&variables={"id":"${user.id}","first":${limit}}`, 
         method: 'GET',
         headers: headers
       };
