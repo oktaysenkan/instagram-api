@@ -99,11 +99,9 @@ app.get('/api/users/:username/posts', (req, res) => {
         status: 401,
       });
     } else {
-      const page = req.query.page ? req.query.page : 1;
-      const perPageCount = 10;
-      PostService.getUserPosts(user, page * perPageCount).then(posts => {
-        const offset = (page - 1) * 10;
-        posts.posts = posts.posts.slice(offset, offset + perPageCount);
+      const first = req.query.first;
+      const after = req.query.after;
+      PostService.getUserPosts(user, first, after).then(posts => {
         res.json(posts);
       }).catch(error => {
         res.status(error.status).json(error);

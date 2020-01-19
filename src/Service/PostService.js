@@ -2,7 +2,7 @@ const request = require('request');
 import { USER_AGENT, SESSION_ID, BASE_URL } from '../../config'
 
 class PostService {
-  static getUserPosts(user, limit) {
+  static getUserPosts(user, first = 10, after = null) {
     return new Promise((resolve, reject) => {
       const headers = {
         'Content-Type': 'application/json',
@@ -10,25 +10,34 @@ class PostService {
         'Cookie': `sessionid=${SESSION_ID};`
       };
       const options = {
-        url: `https://www.instagram.com/graphql/query/?query_hash=e769aa130647d2354c40ea6a439bfc08&variables={"id":"${user.id}","first":${limit}}`, 
+        url: `https://www.instagram.com/graphql/query/?query_hash=e769aa130647d2354c40ea6a439bfc08&variables={"id":"${user.id}","first":${first},"after":${after}}`, 
         method: 'GET',
         headers: headers
       };
       request(options, (error, response, body) => {
-        let data = JSON.parse(body).data.user.edge_owner_to_timeline_media.edges;
-        if (data.length > 0) {
+        if (!body){
+          console.log('boş');
+        }
+        let data = JSON.parse(body);
+        data = data.data.user.edge_owner_to_timeline_media;
+
+        if (data.count > 0) {
           const posts = {
             owner: {
               id: user.id,
               username: user.username,
               pictureUrl: user.pictureUrl,
             },
+            pageInfo: {
+              hasNextPage: data.page_info.has_next_page,
+              endCursor: data.page_info.end_cursor,
+            },
             posts: [],
             urls: {
               profile: `${BASE_URL}/api/users/${user.username}/profile`,
             }
           }
-          data.map(({node}) => {
+          data.edges.map(({node}) => {
             const caption = node.edge_media_to_caption.edges.length > 0 && node.edge_media_to_caption.edges[0].node.text;
             posts.posts.push({
               type: node.is_video ? 'video' : 'image',
