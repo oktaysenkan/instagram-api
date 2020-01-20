@@ -6,7 +6,8 @@ class UserService {
   static  getUser = (username) => {
     return new Promise((resolve, reject) => {
       request(`https://www.instagram.com/web/search/topsearch/?context=user&count=0&query=${username}`, (error, response, body) => {
-        const user = JSON.parse(body).users[0];
+        let user = JSON.parse(body);
+        user = user.users[0]
         if (user) {
           resolve({
             id: user.user.pk,

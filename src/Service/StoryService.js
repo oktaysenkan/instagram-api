@@ -14,7 +14,8 @@ class StoryService {
         headers: headers
       };
       request(options, (error, response, body) => {
-        let data = JSON.parse(body).data.reels_media[0];
+        let data = JSON.parse(body)
+        data = data.data.reels_media[0];
         if (data) {
           const stories = {
             owner: {

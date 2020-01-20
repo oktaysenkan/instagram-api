@@ -10,17 +10,20 @@ class PostService {
         'Cookie': `sessionid=${SESSION_ID};`
       };
       const options = {
-        url: `https://www.instagram.com/graphql/query/?query_hash=e769aa130647d2354c40ea6a439bfc08&variables={"id":"${user.id}","first":${first},"after":${after}}`, 
+        url: `https://www.instagram.com/graphql/query/?query_hash=e769aa130647d2354c40ea6a439bfc08&variables={"id":"${user.id}","first":"${first}","after":${after}}`, 
         method: 'GET',
         headers: headers
       };
       request(options, (error, response, body) => {
-        if (!body){
-          console.log('boş');
-        }
         let data = JSON.parse(body);
+        if (data.message) {
+          reject({
+            message: data.message,
+            status: 500,
+          });
+          return;
+        }
         data = data.data.user.edge_owner_to_timeline_media;
-
         if (data.count > 0) {
           const posts = {
             owner: {

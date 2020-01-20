@@ -65,6 +65,7 @@ class HighlightService {
       };
       request(options, (error, response, body) => {
         let data = JSON.parse(body).data.reels_media;
+        data = data.data.reels_media;
         if (data) {
           data = data[0];
           const highlights = {
