@@ -1,49 +1,51 @@
 const request = require('request');
-import { USER_AGENT, SESSION_ID, BASE_URL } from '../../config'
-
+import { USER_AGENT, SESSION_ID, BASE_URL } from '../../config';
 
 class UserService {
-  static  getUser = (username) => {
+  static getUser = (username) => {
     return new Promise((resolve, reject) => {
-      request(`https://www.instagram.com/web/search/topsearch/?context=user&count=0&query=${username}`, (error, response, body) => {
-        let user = JSON.parse(body);
-        user = user.users[0]
-        if (user) {
-          resolve({
-            id: user.user.pk,
-            username: user.user.username,
-            fullName: user.user.full_name,
-            isPrivate: user.user.is_private,
-            pictureUrl: user.user.profile_pic_url,
-            isVerified: user.user.is_verified,
-            urls: {
-              profile: `${BASE_URL}/api/users/${user.user.username}/profile`,
-              highlights: `${BASE_URL}/api/users/${user.user.username}/highlights`,
-              stories: `${BASE_URL}/api/users/${user.user.username}/stories`,
-              posts: `${BASE_URL}/api/users/${user.user.username}/posts`,
-            }
-          });
-        } else {
-          reject({
-            message: 'User not found!',
-            status: 404,
-          });
-        }
-      });
-    })
-  }
+      request(
+        `https://www.instagram.com/web/search/topsearch/?context=user&count=0&query=${username}`,
+        (error, response, body) => {
+          let user = JSON.parse(body);
+          user = user.users[0];
+          if (user) {
+            resolve({
+              id: user.user.pk,
+              username: user.user.username,
+              fullName: user.user.full_name,
+              isPrivate: user.user.is_private,
+              pictureUrl: user.user.profile_pic_url,
+              isVerified: user.user.is_verified,
+              urls: {
+                profile: `${BASE_URL}/api/users/${user.user.username}/profile`,
+                highlights: `${BASE_URL}/api/users/${user.user.username}/highlights`,
+                stories: `${BASE_URL}/api/users/${user.user.username}/stories`,
+                posts: `${BASE_URL}/api/users/${user.user.username}/posts`,
+              },
+            });
+          } else {
+            reject({
+              message: 'User not found!',
+              status: 404,
+            });
+          }
+        },
+      );
+    });
+  };
 
   static getProfile = (userId) => {
     return new Promise((resolve, reject) => {
       const headers = {
         'Content-Type': 'application/json',
         'User-Agent': USER_AGENT,
-        'Cookie': `sessionid=${SESSION_ID};`
+        Cookie: `sessionid=${SESSION_ID};`,
       };
       const options = {
         url: `https://i.instagram.com/api/v1/users/${userId}/info/`,
         method: 'GET',
-        headers: headers
+        headers: headers,
       };
       request(options, (error, response, body) => {
         let data = JSON.parse(body).user;
@@ -75,8 +77,8 @@ class UserService {
           });
         }
       });
-    })
-  }
+    });
+  };
 }
 
 export default UserService;
