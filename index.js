@@ -59,12 +59,13 @@ app.get('/api/users/:username/stories', (req, res) => {
           status: 401,
         });
       } else {
-        StoryService.getStories(user.id)
+        api
+          .getStories(user.id)
           .then((stories) => {
             res.json(stories);
           })
           .catch((error) => {
-            res.status(error.status).json(error);
+            res.json(error);
           });
       }
     })
