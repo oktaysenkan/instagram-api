@@ -35,7 +35,8 @@ app.get('/api/users/:username/profile', (req, res) => {
   const username = req.params.username;
   UserService.getUser(username)
     .then((user) => {
-      UserService.getProfile(user.id)
+      api
+        .getProfile(user.id)
         .then((profile) => {
           res.json(profile);
         })

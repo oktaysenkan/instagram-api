@@ -1,7 +1,5 @@
 import { http } from '../configs';
 
-const request = require('request');
-
 const getUser = async (username) => {
   try {
     const { data } = await http.get(
@@ -11,67 +9,53 @@ const getUser = async (username) => {
     const { users } = data;
 
     if (!users.length > 0) {
-      return Promise.reject('User not found!');
+      return Promise.reject({
+        message: 'User not found!',
+        status: 404,
+      });
     }
 
-    const user = users.pop();
+    const { user } = users.shift();
 
     return Promise.resolve({
-      id: user.user.pk,
-      username: user.user.username,
-      fullName: user.user.full_name,
-      isPrivate: user.user.is_private,
-      pictureUrl: user.user.profile_pic_url,
-      isVerified: user.user.is_verified,
+      id: user.pk,
+      username: user.username,
+      fullName: user.full_name,
+      isPrivate: user.is_private,
+      pictureUrl: user.profile_pic_url,
+      isVerified: user.is_verified,
     });
   } catch (error) {
     return Promise.reject(error.response.data);
   }
 };
 
-const getProfile = (userId) => {
-  return new Promise((resolve, reject) => {
-    const headers = {
-      'Content-Type': 'application/json',
-      'User-Agent': USER_AGENT,
-      Cookie: `sessionid=${SESSION_ID};`,
-    };
-    const options = {
-      url: `https://i.instagram.com/api/v1/users/${userId}/info/`,
-      method: 'GET',
-      headers: headers,
-    };
-    request(options, (error, response, body) => {
-      let data = JSON.parse(body).user;
-      if (data) {
-        const user = {
-          id: userId,
-          username: data.username,
-          fullName: data.full_name,
-          isPrivate: data.is_private,
-          isVerified: data.is_verified,
-          category: data.category,
-          mediaCount: data.media_count,
-          followerCount: data.follower_count,
-          followingCount: data.following_count,
-          biography: data.biography,
-          pictureUrl: data.profile_pic_url,
-          pictureUrlHD: data.hd_profile_pic_url_info.url,
-          urls: {
-            highlights: `${BASE_URL}/api/users/${data.username}/highlights`,
-            stories: `${BASE_URL}/api/users/${data.username}/stories`,
-            posts: `${BASE_URL}/api/users/${data.username}/posts`,
-          },
-        };
-        resolve(user);
-      } else {
-        reject({
-          message: 'User not found!',
-          status: 404,
-        });
-      }
+const getProfile = async (userId) => {
+  try {
+    const { data } = await http.get(`https://i.instagram.com/api/v1/users/${userId}/info/`);
+
+    const { user } = data;
+
+    return Promise.resolve({
+      id: userId,
+      username: user.username,
+      fullName: user.full_name,
+      isPrivate: user.is_private,
+      isVerified: user.is_verified,
+      category: user.category,
+      mediaCount: user.media_count,
+      followerCount: user.follower_count,
+      followingCount: user.following_count,
+      biography: user.biography,
+      pictureUrl: user.profile_pic_url,
+      pictureUrlHD: user.hd_profile_pic_url_info.url,
     });
-  });
+  } catch (error) {
+    return Promise.reject({
+      message: 'User not found!',
+      status: 404,
+    });
+  }
 };
 
-export { getUser };
+export { getUser, getProfile };
