@@ -51,7 +51,8 @@ app.get('/api/users/:username/profile', (req, res) => {
 
 app.get('/api/users/:username/stories', (req, res) => {
   const username = req.params.username;
-  UserService.getUser(username)
+  api
+    .getUser(username)
     .then((user) => {
       if (user.isPrivate) {
         res.status(401).json({
@@ -84,13 +85,14 @@ app.get('/api/users/:username/highlights', (req, res) => {
           status: 401,
         });
       } else {
-        HighlightService.getHighlights(user.id)
+        api
+          .getHighlights(user.id)
           .then((highlights) => {
             res.json(highlights);
           })
           .catch((error) => {
             console.log(error);
-            res.status(error.status).json(error);
+            res.json(error);
           });
       }
     })
