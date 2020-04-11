@@ -4,16 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node index.js"
+    "start": "babel-node index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.19.2",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "nodemon": "^2.0.2",
-    "request": "^2.88.0"
+    "axios": "^0.19.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.7",

@@ -6,7 +6,7 @@ const http = axios.create({
   headers: {
     'Content-Type': 'application/json',
     'User-Agent': configs.USER_AGENT,
-    Cookie: `sessionid=${configs.SESSION_ID};`,
+    Cookie: `sessionid=${configs.sessionId};`,
   },
 });
 
