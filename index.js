@@ -129,17 +129,18 @@ app.get('/api/users/:username/posts', (req, res) => {
       } else {
         const first = req.query.first;
         const after = req.query.after;
-        PostService.getUserPosts(user, first, after)
+        api
+          .getPosts(user.id, first, after)
           .then((posts) => {
             res.json(posts);
           })
           .catch((error) => {
-            res.status(error.status).json(error);
+            res.json(error);
           });
       }
     })
     .catch((error) => {
-      res.status(error.status).json(error);
+      res.json(error);
     });
 });
 
