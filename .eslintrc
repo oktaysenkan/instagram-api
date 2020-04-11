@@ -4,7 +4,8 @@
     "es6": true,
     "node": true
   },
-  "extends": "airbnb/base",
+  "extends": ["plugin:jest/recommended", "airbnb/base"],
+  "plugins": ["jest"],
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module"

@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node index.js"
+    "start": "babel-node index.js",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/jest": "^25.2.1",
     "axios": "^0.19.2"
   },
   "devDependencies": {
@@ -16,11 +18,16 @@
     "@babel/core": "^7.7.7",
     "@babel/node": "^7.7.7",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.9.0",
     "@babel/preset-env": "^7.7.7",
+    "@babel/runtime": "^7.9.2",
+    "babel-jest": "^25.3.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jest": "^23.8.2",
+    "jest": "^25.3.0",
     "prettier": "^2.0.4"
   }
 }

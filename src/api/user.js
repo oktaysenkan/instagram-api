@@ -17,6 +17,13 @@ const getUser = async (username) => {
 
     const { user } = users.shift();
 
+    if (user.username !== username) {
+      return Promise.reject({
+        message: 'User not found!',
+        status: 404,
+      });
+    }
+
     return Promise.resolve({
       id: user.pk,
       username: user.username,
