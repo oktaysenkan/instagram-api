@@ -1,7 +1,11 @@
-import api from './src/api';
-import configs from './src/configs';
+import api from './api';
+import configs from './configs';
 
 const instagramApi = (options) => {
+  if (!options.sessionId) {
+    throw new Error('Session ID cannot be null');
+  }
+
   configs.defaults.sessionId = options.sessionId;
   return api;
 };
