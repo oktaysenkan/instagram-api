@@ -97,18 +97,23 @@ app.get('/api/users/:username/highlights', (req, res) => {
       }
     })
     .catch((error) => {
-      res.status(error.status).json(error);
+      console.log(error);
+
+      res.json(error);
     });
 });
 
 app.get('/api/highlights/:highlightedId', (req, res) => {
   const highlightedId = req.params.highlightedId;
-  HighlightService.getHightlightedStories(highlightedId)
+  api
+    .getHightlightedStories(highlightedId)
     .then((highlights) => {
       res.json(highlights);
     })
     .catch((error) => {
-      res.status(error.status).json(error);
+      console.log(error);
+
+      res.json(error);
     });
 });
 

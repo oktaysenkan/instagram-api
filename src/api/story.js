@@ -17,20 +17,13 @@ const getStories = async (userId) => {
 
     const media = medias.shift();
 
-    const stories = {
-      owner: {
-        username: media.owner.username,
-        id: media.owner.id,
-        pictureUrl: media.owner.profile_pic_url,
-      },
-      stories: media.items.map((story) => ({
-        type: story.is_video ? 'video' : 'image',
-        publishingDate: story.taken_at_timestamp,
-        url: story.is_video
-          ? story.video_resources[story.video_resources.length - 1].src
-          : story.display_url,
-      })),
-    };
+    const stories = media.items.map((story) => ({
+      type: story.is_video ? 'video' : 'image',
+      publishingDate: story.taken_at_timestamp,
+      url: story.is_video
+        ? story.video_resources[story.video_resources.length - 1].src
+        : story.display_url,
+    }));
 
     return Promise.resolve(stories);
   } catch (error) {
