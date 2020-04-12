@@ -10,13 +10,13 @@ const getHighlights = async (userId) => {
 
     if (!medias.length > 0) {
       return Promise.reject({
-        message: 'Highlight not found',
+        message: 'Highlight not found!',
         status: 404,
       });
     }
 
     const highlights = medias.map(({ node }) => ({
-      id: node.id,
+      id: +node.id,
       title: node.title,
       pictureUrl: node.cover_media_cropped_thumbnail.url,
       pictureUrlHD: node.cover_media.thumbnail_src,
