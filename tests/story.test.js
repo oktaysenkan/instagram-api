@@ -5,6 +5,7 @@ describe('getStories function', () => {
     await expect(instance.getStories(1997256893)).resolves.toContainEqual(
       expect.objectContaining({
         publishingDate: expect.any(Number),
+        type: expect.any(String),
         url: expect.any(String),
       }),
     );

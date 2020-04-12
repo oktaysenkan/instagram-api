@@ -19,3 +19,22 @@ describe('getHighlights function', () => {
     });
   });
 });
+
+describe('getHightlightedStories function', () => {
+  it('it should be story object given have correct highlight id', async () => {
+    await expect(instance.getHightlightedStories(17843774746706188)).resolves.toContainEqual(
+      expect.objectContaining({
+        publishingDate: expect.any(Number),
+        type: expect.any(String),
+        url: expect.any(String),
+      }),
+    );
+  });
+
+  it('it should be error given invalid highlight id', async () => {
+    await expect(instance.getHightlightedStories(12345)).rejects.toStrictEqual({
+      message: 'Highlight not found!',
+      status: 404,
+    });
+  });
+});

@@ -38,7 +38,7 @@ const getHightlightedStories = async (hightlightedId) => {
 
     if (!medias.length > 0) {
       return Promise.reject({
-        message: 'Highlight not found',
+        message: 'Highlight not found!',
         status: 404,
       });
     }
@@ -55,7 +55,10 @@ const getHightlightedStories = async (hightlightedId) => {
 
     return Promise.resolve(highlights);
   } catch (error) {
-    return Promise.reject(error.response.data);
+    return Promise.reject({
+      message: 'Highlight not found!',
+      status: 404,
+    });
   }
 };
 
