@@ -27,7 +27,10 @@ const getStories = async (userId) => {
 
     return Promise.resolve(stories);
   } catch (error) {
-    return Promise.reject(error.response.data);
+    return Promise.reject({
+      message: 'Story not found!',
+      status: 404,
+    });
   }
 };
 

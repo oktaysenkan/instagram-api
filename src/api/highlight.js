@@ -24,7 +24,10 @@ const getHighlights = async (userId) => {
 
     return Promise.resolve(highlights);
   } catch (error) {
-    return Promise.reject(error.response.data);
+    return Promise.reject({
+      message: 'Highlight not found!',
+      status: 404,
+    });
   }
 };
 

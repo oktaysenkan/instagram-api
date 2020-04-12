@@ -33,7 +33,10 @@ const getUser = async (username) => {
       isVerified: user.is_verified,
     });
   } catch (error) {
-    return Promise.reject(error.response.data);
+    return Promise.reject({
+      message: 'User not found!',
+      status: 404,
+    });
   }
 };
 

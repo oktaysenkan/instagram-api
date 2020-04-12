@@ -11,7 +11,7 @@ const getPosts = async (userId, first = 10, after = null) => {
 
     if (!timeline.count > 0) {
       return Promise.reject({
-        message: 'Post not found',
+        message: 'Post not found!',
         status: 404,
       });
     }
@@ -41,7 +41,10 @@ const getPosts = async (userId, first = 10, after = null) => {
 
     return Promise.resolve(result);
   } catch (error) {
-    return Promise.reject(error.response.data);
+    return Promise.reject({
+      message: 'Post not found!',
+      status: 404,
+    });
   }
 };
 
