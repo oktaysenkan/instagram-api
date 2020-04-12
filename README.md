@@ -2,6 +2,10 @@
 
 Private Instagram API library, no required any API token or login credentials.
 
+## Installation
+
+`npm i @oktaysenkan/instagram-api --save`
+
 ## Usage
 
 ```js

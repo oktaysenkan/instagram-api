@@ -1,7 +1,10 @@
 {
-  "name": "instagram-story-api",
-  "version": "1.0.4",
+  "name": "@oktaysenkan/instagram-api",
+  "version": "1.0.1",
   "description": "",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "./dist/index.js",
   "files": [
     "/dist"
