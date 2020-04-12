@@ -72,7 +72,7 @@ const stories = await instance.getStories(user.id);
 ```
 
 ```js
-const stories = await instance.getHighlights(user.id);
+const highlights = await instance.getHighlights(user.id);
 ```
 
 ```json
@@ -105,7 +105,7 @@ const stories = await instance.getHighlights(user.id);
 ```
 
 ```js
-const stories = await instance.getHightlightedStories(highlights.shift().id);
+const firstStoriesHighlights = await instance.getHightlightedStories(highlights.shift().id);
 ```
 
 ```json
