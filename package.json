@@ -1,24 +1,42 @@
 {
-  "name": "instagram-story-api",
-  "version": "1.0.0",
+  "name": "@oktaysenkan/instagram-api",
+  "version": "1.0.1",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "nodemon --exec babel-node index.js"
+  "publishConfig": {
+    "access": "public"
   },
-  "author": "",
+  "main": "./dist/index.js",
+  "files": [
+    "/dist"
+  ],
+  "scripts": {
+    "build": "babel --delete-dir-on-start src --out-dir dist",
+    "test": "jest --coverage",
+    "preversion": "npm test",
+    "prepublishOnly": "npm run build",
+    "deneme": "babel-node deneme.js"
+  },
+  "author": "Oktay Şenkan <oktay.senkan@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "nodemon": "^2.0.2",
-    "request": "^2.88.0"
+    "@types/jest": "^25.2.1",
+    "axios": "^0.19.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.7",
     "@babel/core": "^7.7.7",
     "@babel/node": "^7.7.7",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
-    "@babel/preset-env": "^7.7.7"
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/runtime": "^7.9.2",
+    "babel-jest": "^25.3.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jest": "^23.8.2",
+    "jest": "^25.3.0",
+    "prettier": "^2.0.4"
   }
 }
