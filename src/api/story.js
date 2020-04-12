@@ -10,7 +10,7 @@ const getStories = async (userId) => {
 
     if (!medias.length > 0) {
       return Promise.reject({
-        message: 'Story not found',
+        message: 'Story not found!',
         status: 404,
       });
     }
