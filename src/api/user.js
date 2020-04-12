@@ -25,7 +25,7 @@ const getUser = async (username) => {
     }
 
     return Promise.resolve({
-      id: user.pk,
+      id: +user.pk,
       username: user.username,
       fullName: user.full_name,
       isPrivate: user.is_private,
