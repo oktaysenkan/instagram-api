@@ -10,4 +10,4 @@ const instagramApi = (options) => {
   return api;
 };
 
-export default instagramApi;
+module.exports = instagramApi;
