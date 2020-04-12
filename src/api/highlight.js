@@ -34,7 +34,7 @@ const getHighlights = async (userId) => {
 const getHightlightedStories = async (hightlightedId) => {
   try {
     const { data } = await http.get(
-      `https://www.instagram.com/graphql/query/?query_hash=52a36e788a02a3c612742ed5146f1676&variables={"highlight_reel_ids":["${hightlightedId}"],"precomposed_overlay":false}`,
+      `https://www.instagram.com/graphql/query/?query_hash=f5dc1457da7a4d3f88762dae127e0238&variables=%7B%22reel_ids%22:%5B%5D,%22tag_names%22:%5B%5D,%22location_ids%22:%5B%5D,%22highlight_reel_ids%22:%5B%22${hightlightedId}%22%5D,%22precomposed_overlay%22:false,%22show_story_viewer_list%22:true,%22story_viewer_fetch_count%22:50,%22story_viewer_cursor%22:%22%22,%22stories_video_dash_manifest%22:false%7D`,
     );
 
     const medias = data.data.reels_media;

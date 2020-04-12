@@ -1,281 +1,153 @@
 # Instagram API
+
 Private Instagram API library, no required any API token or login credentials.
 
 ## Usage
 
-`GET api/users/{username}`
+```js
+import instagramApi from 'instagram-api';
 
-#### Response
+const instance = instagramApi({
+  sessionId: 'YOUR_SESSION_ID',
+});
+```
+
+```js
+const user = await instance.getUser('msaistanbul');
+```
 
 ```json
 {
-  "id": "37473657",
+  "id": 37473657,
   "username": "msaistanbul",
   "fullName": "Mutfak Sanatları Akademisi",
   "isPrivate": false,
-  "pictureUrl": "https://scontent-lhr3-1.cdninstagram.com/v/t51.2885-19/11881767_743326829127820_1373246811_a.jpg?_nc_ht=scontent-lhr3-1.cdninstagram.com&_nc_ohc=InQGGZP0GwkAX8N2CTu&oh=a768316077a5e86ce1875f9c6d23047a&oe=5EA46FF5",
-  "isVerified": false,
-  "urls": {
-    "profile": "http://localhost:3000/api/users/msaistanbul/profile",
-    "highlights": "http://localhost:3000/api/users/msaistanbul/highlights",
-    "stories": "http://localhost:3000/api/users/msaistanbul/stories",
-    "posts": "http://localhost:3000/api/users/msaistanbul/posts"
-  }
+  "pictureUrl": "https://instagram.fadb5-1.fna.fbcdn.net/v/t51.2885-19/11881767_743326829127820_1373246811_a.jpg?_nc_ht=instagram.fadb5-1.fna.fbcdn.net&_nc_ohc=6pn4wasDKOkAX_tAn9_&oh=104aa335ea964ffe2187785d214f7165&oe=5EBCE90B",
+  "isVerified": false
 }
 ```
 
-#### Error Messages
-
-```json
-{
-  "message": "User not found!",
-  "status": 404
-}
+```js
+const profile = await instance.getProfile(user.id);
 ```
 
-`GET api/users/{username}/profile`
-
-#### Response
-
 ```json
 {
-  "id": "37473657",
+  "id": 37473657,
   "username": "msaistanbul",
   "fullName": "Mutfak Sanatları Akademisi",
   "isPrivate": false,
   "isVerified": false,
-  "media_count": 2976,
-  "followerCount": 124709,
-  "followingCount": 0,
+  "category": "Education",
+  "mediaCount": 3068,
+  "followerCount": 127549,
+  "followingCount": 1,
   "biography": "Türkiye'nin profesyonel mutfak okulu",
-  "pictureUrl": "https://scontent-lhr3-1.cdninstagram.com/v/t51.2885-19/11881767_743326829127820_1373246811_a.jpg?_nc_ht=scontent-lhr3-1.cdninstagram.com&_nc_ohc=InQGGZP0GwkAX8N2CTu&oh=a768316077a5e86ce1875f9c6d23047a&oe=5EA46FF5",
-  "pictureUrlHD": "https://scontent-lhr3-1.cdninstagram.com/v/t51.2885-19/11881767_743326829127820_1373246811_a.jpg?_nc_ht=scontent-lhr3-1.cdninstagram.com&_nc_ohc=InQGGZP0GwkAX8N2CTu&oh=a768316077a5e86ce1875f9c6d23047a&oe=5EA46FF5",
-  "urls": {
-    "highlights": "http://localhost:3000/api/users/msaistanbul/highlights",
-    "stories": "http://localhost:3000/api/users/msaistanbul/stories",
-    "posts": "http://localhost:3000/api/users/msaistanbul/posts"
-  }
+  "pictureUrl": "https://instagram.fadb5-1.fna.fbcdn.net/v/t51.2885-19/11881767_743326829127820_1373246811_a.jpg?_nc_ht=instagram.fadb5-1.fna.fbcdn.net&_nc_ohc=6pn4wasDKOkAX_tAn9_&oh=104aa335ea964ffe2187785d214f7165&oe=5EBCE90B",
+  "pictureUrlHD": "https://instagram.fadb5-1.fna.fbcdn.net/v/t51.2885-19/11881767_743326829127820_1373246811_a.jpg?_nc_ht=instagram.fadb5-1.fna.fbcdn.net&_nc_ohc=6pn4wasDKOkAX_tAn9_&oh=104aa335ea964ffe2187785d214f7165&oe=5EBCE90B"
 }
 ```
 
-#### Error Messages
-
-```json
-{
-  "message": "User not found!",
-  "status": 404
-}
+```js
+const stories = await instance.getStories(user.id);
 ```
 
-`GET api/users/{username}/stories`
-
-#### Response
-
 ```json
-{
-  "owner": {
-    "username": "msaistanbul",
-    "id": "37473657",
-    "pictureUrl": "https://scontent-lhr3-1.cdninstagram.com/v/t51.2885-19/11881767_743326829127820_1373246811_a.jpg?_nc_ht=scontent-lhr3-1.cdninstagram.com&_nc_ohc=InQGGZP0GwkAX8N2CTu&oh=a768316077a5e86ce1875f9c6d23047a&oe=5EA46FF5"
+[
+  {
+    "type": "image",
+    "publishingDate": 1586682298,
+    "url": "https://instagram.fadb5-1.fna.fbcdn.net/v/t51.12442-15/e35/92705030_698473380897285_9122577853264652700_n.jpg?_nc_ht=instagram.fadb5-1.fna.fbcdn.net&_nc_cat=109&_nc_ohc=xdZFFlYI_akAX_vY9C3&oh=b8d5ee2d24e5753a13da379df8595996&oe=5E95B447&ig_cache_key=MjI4NTU3OTI3MjA4NTM3ODQ3MQ%3D%3D.2"
   },
-  "stories": [
-    {
-      "type": "video",
-      "publishingDate": 1579073900,
-      "url": "https://scontent-lhr3-1.cdninstagram.com/v/t50.12441-16/83099631_125808145581941_3830968674841696004_n.mp4?_nc_ht=scontent-lhr3-1.cdninstagram.com&_nc_cat=105&_nc_ohc=81oEZ_ocD_YAX8wReoZ&oe=5E2297CE&oh=b6d119f8395c975bcd663ea8febb105f"
-    },
-    {
-      "type": "video",
-      "publishingDate": 1579074815,
-      "url": "https://scontent-lhr3-1.cdninstagram.com/v/t50.12441-16/82711561_184372606296685_1900471825283287996_n.mp4?_nc_ht=scontent-lhr3-1.cdninstagram.com&_nc_cat=101&_nc_ohc=CNpp5T5AWowAX8oR4sY&oe=5E22EE4B&oh=da32ce05acdae404da4c699714eaaeec"
-    },
-    {
-      "type": "video",
-      "publishingDate": 1579080518,
-      "url": "https://scontent-lhr3-1.cdninstagram.com/v/t50.12441-16/82950442_216794292663502_3257871799179389804_n.mp4?_nc_ht=scontent-lhr3-1.cdninstagram.com&_nc_cat=110&_nc_ohc=c32DFxEuu9IAX9Tv9EO&oe=5E22BEF9&oh=f2571a55838e81df1d9b7dc266bf4f05"
-    }
-  ],
-  "urls": {
-    "user": "http://localhost:3000/api/users/msaistanbul"
+  {
+    "type": "image",
+    "publishingDate": 1586686936,
+    "url": "https://instagram.fadb5-1.fna.fbcdn.net/v/t51.12442-15/e35/92770835_696332224475311_4243176858723839369_n.jpg?_nc_ht=instagram.fadb5-1.fna.fbcdn.net&_nc_cat=107&_nc_ohc=0lUYv_NPo5wAX-lvuU0&oh=0b53faad2b07a3ce9378113070eb49d0&oe=5E9567D1&ig_cache_key=MjI4NTYxODE3MDU2Mzk1OTc4MQ%3D%3D.2"
   }
-}
+]
 ```
 
-#### Error Messages
-
-```json
-{
-  "message": "User not found!",
-  "status": 404
-}
+```js
+const stories = await instance.getHighlights(user.id);
 ```
 
 ```json
-{
-  "message": "This account is private!",
-  "status": 401
-}
-```
-
-```json
-{
-  "message": "Story not found!",
-  "status": 404
-}
-```
-
-`GET api/users/{username}/highlights`
-
-#### Response
-
-```json
-{
-  "owner": {
-    "id": "37473657",
-    "username": "msaistanbul",
-    "pictureUrl": "https://scontent-lhr3-1.cdninstagram.com/v/t51.2885-19/11881767_743326829127820_1373246811_a.jpg?_nc_ht=scontent-lhr3-1.cdninstagram.com&_nc_ohc=InQGGZP0GwkAX8N2CTu&oh=a768316077a5e86ce1875f9c6d23047a&oe=5EA46FF5"
+[
+  {
+    "id": 18018470521080390,
+    "title": "15 Detay",
+    "pictureUrl": "https://instagram.fadb5-1.fna.fbcdn.net/v/t51.2885-15/s150x150/92926914_225992381986206_1535753481570063672_n.jpg?_nc_ht=instagram.fadb5-1.fna.fbcdn.net&_nc_ohc=elQyb7IDbOQAX9zI0j_&oh=238e2c1ca1747119448043d087b93d38&oe=5EBCB9D1",
+    "pictureUrlHD": "https://instagram.fadb5-1.fna.fbcdn.net/v/t51.12442-15/sh0.08/e35/c0.476.1080.1080a/s640x640/50515163_2264397003826094_2749210194251713412_n.jpg?_nc_ht=instagram.fadb5-1.fna.fbcdn.net&_nc_cat=102&_nc_ohc=z52OA3oBBbsAX_IHLoW&oh=16b22ed0091978268664c3af3c604ed0&oe=5E959C23&ig_cache_key=MTk3Mjc4ODk1OTMyOTA1NTg2MA%3D%3D.2.c"
   },
-  "highlights": [
-    {
-      "id": "18100294678073873",
-      "title": "MSA PODCAST",
-      "pictureUrl": "https://scontent-lhr3-1.cdninstagram.com/v/t51.12442-15/e35/c0.322.828.828a/s150x150/75208739_512697172973335_9214020521200125751_n.jpg?_nc_ht=scontent-lhr3-1.cdninstagram.com&_nc_cat=107&_nc_ohc=VsjKRxcjS-8AX8z6fY4&oh=3262f03370fdb316970d912a8ca8696a&oe=5E226BD2",
-      "pictureUrlHD": "https://scontent-lhr3-1.cdninstagram.com/v/t51.12442-15/sh0.08/e35/c0.322.828.828a/s640x640/75208739_512697172973335_9214020521200125751_n.jpg?_nc_ht=scontent-lhr3-1.cdninstagram.com&_nc_cat=107&_nc_ohc=VsjKRxcjS-8AX8z6fY4&oh=9761aa2763c98716507043c9e53265c2&oe=5E22F321"
-    },
-    {
-      "id": "17937113836136720",
-      "title": "TANIŞMA GÜNÜ",
-      "pictureUrl": "https://scontent-lhr3-1.cdninstagram.com/v/t51.2885-15/s150x150/65239693_2426947027327685_1005801188913695630_n.jpg?_nc_ht=scontent-lhr3-1.cdninstagram.com&_nc_ohc=1l2eSbCBbNgAX-xnUz0&oh=c150453dff112c1449fa46b37bac5cba&oe=5ED8CD2D",
-      "pictureUrlHD": "https://scontent-lhr3-1.cdninstagram.com/v/t51.12442-15/sh0.08/e35/c0.420.1080.1080a/s640x640/37258546_210026109674575_2986517444987715584_n.jpg?_nc_ht=scontent-lhr3-1.cdninstagram.com&_nc_cat=107&_nc_ohc=6SloLxPS1RsAX9lf2gd&oh=3a470df5974913019b9d8b40c955e7bf&oe=5E22A53A"
-    }
-  ],
-  "urls": {
-    "profile": "http://localhost:3000/api/users/msaistanbul/profile",
-    "highlights": [
-      "http://localhost:3000/api/highlights/18100294678073873",
-      "http://localhost:3000/api/highlights/17937113836136720"
-    ]
+  {
+    "id": 17867663563236912,
+    "title": "Güncel Haberler",
+    "pictureUrl": "https://instagram.fadb5-1.fna.fbcdn.net/v/t51.2885-15/s150x150/92138770_242284240153627_1193764694243861466_n.jpg?_nc_ht=instagram.fadb5-1.fna.fbcdn.net&_nc_ohc=feJmnX_dVKkAX8NoeiR&oh=5b745e91cc0c773971c609a7be46af97&oe=5EBDD60D",
+    "pictureUrlHD": "https://instagram.fadb5-1.fna.fbcdn.net/v/t51.12442-15/sh0.08/e35/c0.292.750.750a/s640x640/90672480_1486643088168804_7571487693743469584_n.jpg?_nc_ht=instagram.fadb5-1.fna.fbcdn.net&_nc_cat=100&_nc_ohc=LOGM2QTPZt4AX-iI6_p&oh=021176452baae0505d0af38a2bcc691a&oe=5E95A648&ig_cache_key=MjI3MDU4MzA4OTAxMzQwMDc5MQ%3D%3D.2.c"
+  },
+  {
+    "id": 17957043859167402,
+    "title": "Listeler",
+    "pictureUrl": "https://instagram.fadb5-1.fna.fbcdn.net/v/t51.2885-15/s150x150/80039215_619108755499093_8109592456435103106_n.jpg?_nc_ht=instagram.fadb5-1.fna.fbcdn.net&_nc_ohc=JsHsWFqVVjoAX8MAPet&oh=d8413c31d2570b8fbf65502e2009e472&oe=5EBC606F",
+    "pictureUrlHD": "https://instagram.fadb5-1.fna.fbcdn.net/v/t51.12442-15/sh0.08/e35/c0.476.1080.1080a/s640x640/46624987_2248652905419942_7963609356875917045_n.jpg?_nc_ht=instagram.fadb5-1.fna.fbcdn.net&_nc_cat=106&_nc_ohc=mRURLTwSsm0AX9K05Gx&oh=77ebc017a9096f4e8bce79b5fd902883&oe=5E957EEC&ig_cache_key=MTkyNzA5NDgxNzcwMTgyNTQ5Mw%3D%3D.2.c"
+  },
+  {
+    "id": 18137090059035160,
+    "title": "Sevgili Günlük",
+    "pictureUrl": "https://instagram.fadb5-1.fna.fbcdn.net/v/t51.2885-15/s150x150/92641970_231972834525725_3481302566092020027_n.jpg?_nc_ht=instagram.fadb5-1.fna.fbcdn.net&_nc_ohc=ALM78ZbP8O8AX9awOVs&oh=bb1f90e0ab6629eddadef7277a3e6f2b&oe=5EBCCCE1",
+    "pictureUrlHD": "https://instagram.fadb5-1.fna.fbcdn.net/v/t51.12442-15/sh0.08/e35/c0.292.750.750a/s640x640/92757208_530525980996139_996516879066484727_n.jpg?_nc_ht=instagram.fadb5-1.fna.fbcdn.net&_nc_cat=111&_nc_ohc=ZRekstBFrPkAX9GHJ5k&oh=9eda6e980048c556ff6ff546b806485f&oe=5E9571B7&ig_cache_key=MjI4MTQyOTYzMDQ2MDQ3Mzk3Mg%3D%3D.2.c"
   }
-}
+]
 ```
 
-#### Error Messages
-
-```json
-{
-  "message": "User not found!",
-  "status": 404
-}
+```js
+const stories = await instance.getHightlightedStories(highlights.shift().id);
 ```
 
 ```json
-{
-  "message": "This account is private!",
-  "status": 401
-}
-```
-
-```json
-{
-  "message": "Highlight not found!",
-  "status": 404
-}
-```
-
-`GET api/users/{username}/posts`
-
-#### Response
-
-```json
-{
-  "owner": {
-    "id": "37473657",
-    "username": "msaistanbul",
-    "pictureUrl": "https://scontent-lhr3-1.cdninstagram.com/v/t51.2885-19/11881767_743326829127820_1373246811_a.jpg?_nc_ht=scontent-lhr3-1.cdninstagram.com&_nc_ohc=InQGGZP0GwkAX8N2CTu&oh=a768316077a5e86ce1875f9c6d23047a&oe=5EA46FF5"
+[
+  {
+    "type": "image",
+    "publishingDate": 1586019183,
+    "url": "https://instagram.fadb5-1.fna.fbcdn.net/v/t51.12442-15/e35/p1080x1080/91810848_160743792107008_6710558220805873673_n.jpg?_nc_ht=instagram.fadb5-1.fna.fbcdn.net&_nc_cat=104&_nc_ohc=otYBPF1ITwwAX8d6HPf&oh=981b2d91fa2ff2837feb7f3bdda5d634&oe=5E9591E7&ig_cache_key=MjI4MDAxNjY0NTk4OTA2ODA1Nw%3D%3D.2"
   },
+  {
+    "type": "image",
+    "publishingDate": 1586019172,
+    "url": "https://instagram.fadb5-1.fna.fbcdn.net/v/t51.12442-15/e35/p1080x1080/92447742_2559147737685200_5115363576448154217_n.jpg?_nc_ht=instagram.fadb5-1.fna.fbcdn.net&_nc_cat=108&_nc_ohc=n5vf7mvn4i4AX-A6P8f&oh=e4d388607851f83b46df3a338245bca5&oe=5E95E1A0&ig_cache_key=MjI4MDAxNjU1NTE5OTAyNDk0Mg%3D%3D.2"
+  },
+  {
+    "type": "image",
+    "publishingDate": 1586019163,
+    "url": "https://instagram.fadb5-1.fna.fbcdn.net/v/t51.12442-15/e35/p1080x1080/91579067_530796817871732_213293025869538450_n.jpg?_nc_ht=instagram.fadb5-1.fna.fbcdn.net&_nc_cat=108&_nc_ohc=_Q0bvfnb0nUAX9ZI3uM&oh=f9a84226dc2d797136963fac1de0edae&oe=5E95EBF2&ig_cache_key=MjI4MDAxNjQ3OTU0MjA5MjY4NA%3D%3D.2"
+  }
+]
+```
+
+```js
+const posts = await instance.getPosts(user.id);
+```
+
+```json
+{
   "posts": [
     {
       "type": "image",
-      "displayUrl": "https://scontent-lhr3-1.cdninstagram.com/v/t51.2885-15/e35/p1080x1080/80015033_162659075001974_4898385341257170713_n.jpg?_nc_ht=scontent-lhr3-1.cdninstagram.com&_nc_cat=102&_nc_ohc=crcl1g6KJC4AX8Zr0w6&oh=8f3ab5d70ff62e4f8a59c51ed6383951&oe=5ED5C59D&ig_cache_key=MjIyMTk1Nzg1MDgyMjE4MTU1Ng%3D%3D.2",
-      "publishingDate": 1579098038,
-      "caption": "2019 Prochef mezunlarımızdan Ersin Çay ile sohbet ettik:\n⭐Geçmişten başlayarak anlatacak olursam; asıl mesleğim deri zanaatkarlığıydı. 8-9 yıl kadar bu sektörde çalışmaya devam ettim. Bu süreçte sevdiklerime sürekli yemek hazırlardım ve genellikle de güzel yorumlar aldım, mutfak aşkı içimde hep vardı. Zaman geçtikçe düşünüp karar verme şansım oldu ve sonunda yemek yapmayı meslek edinmeye karar verdim.\n⭐Bu kararı verdikten sonra ilk etapta kısa süreli bir kursa giderek teorik eğitim aldım. Eğitimi tamamladıktan sonra bir catering firmasında staj yapma şansım oldu. Stajın sonunda o zamanki şefimin isteği üzerine bir süre daha aynı yerde çalışmaya devam ettim. Sonrasında ise farklı birkaç restoran ve otelde çalışarak tecrübe edindim, kendimi geliştirdim. Şu an 7 yıldır bu işi yapıyorum ve bu mesleği seçtiğim için çok mutluyum.\n⭐Uzun denebilecek bir süredir bu sektördeyim ancak hala kendimi geliştirmem gereken noktalar var. MSA; hem çalışma arkadaşlarımızdan, hem de sektörden adını ve başarılarını sıkça duyduğumuz bir kurum. Ben de eğitim almaya karar verince MSA’yı tercih ettim.\n⭐Eğitimim boyunca gerçekten bilmediğim çok fazla teknik öğrendim. Farklı şeflerle çalışmak, hem farklı teknik hem de farklı deneyim demek. Daha önce deneyimleme şansım olmayan reçeteleri burada pratik etme şansım oldu. Hem deneyim edinmek, hem diploma almak, üstelik uluslararası geçerliliği olan bir diploma edinmek bence çok önemli bir fırsat.\n⭐Bundan sonraki süreçte de kendimi geliştirmeye devam etmek ve yurt dışına çıkarak yeni deneyimler edinmek istiyorum. #msadayız #msaistanbul",
-      "location": "Mutfak Sanatları Akademisi",
-      "preview": null,
-      "like": 398
-    },
-    {
-      "type": "image",
-      "displayUrl": "https://scontent-lhr3-1.cdninstagram.com/v/t51.2885-15/e35/82660699_113720113494245_6386043191258230705_n.jpg?_nc_ht=scontent-lhr3-1.cdninstagram.com&_nc_cat=105&_nc_ohc=h2mvIl5f4moAX8IdGkX&oh=4865c398744fa09258e82d1c381190ae&oe=5EA248BC&ig_cache_key=MjIyMTc4MDA4MTcwNjQ0MDg3MQ%3D%3D.2",
-      "publishingDate": 1579076847,
-      "caption": "MSA Davet ekibinin, düğün organizasyonları için hazırladığı birbirinden nefis ikramlar 🤩  #msadavet",
+      "dimensions": {
+        "height": 1080,
+        "width": 1080
+      },
+      "displayUrl": "https://instagram.fadb5-1.fna.fbcdn.net/v/t51.2885-15/e35/92453231_330658684563596_8919854620364666586_n.jpg?_nc_ht=instagram.fadb5-1.fna.fbcdn.net&_nc_cat=1&_nc_ohc=_6PW3taMVqYAX990RYH&oh=3afaf0d423d30ad8e257d5aa5849c5d2&oe=5EBE2FA5&ig_cache_key=MjI4NTgyMjMyNzEzNjgwMzM1NA%3D%3D.2",
+      "publishingDate": 1586711277,
+      "caption": "Tekrar tekrar bunları izlediklerine eminim!",
       "location": null,
       "preview": null,
-      "like": 310
+      "like": 20554
     }
   ],
-  "urls": {
-    "profile": "http://localhost:3000/api/users/msaistanbul/profile"
+  "pageInfo": {
+    "hasNextPage": true,
+    "endCursor": "QVFDTVJreDJFZzdDdXlKWk1BU25lbjE4czJkMUhxY2V1Uy14MGpPckh0aDU3V2lTWFNvcEhHeU5tQUplT1pCanZVOFNnbkJRTndzZ0ZQUWtVaXpMMnRTMA=="
   }
-}
-```
-
-#### Error Messages
-
-```json
-{
-  "message": "User not found!",
-  "status": 404
-}
-```
-
-```json
-{
-  "message": "This account is private!",
-  "status": 401
-}
-```
-
-```json
-{
-  "message": "Post not found!",
-  "status": 404
-}
-```
-
-`GET api/highlights/{highlightedId}`
-
-#### Response
-
-```json
-{
-  "owner": {
-    "username": "msaistanbul",
-    "id": "37473657",
-    "pictureUrl": "https://scontent-lhr3-1.cdninstagram.com/v/t51.2885-19/11881767_743326829127820_1373246811_a.jpg?_nc_ht=scontent-lhr3-1.cdninstagram.com&_nc_ohc=7t0KEQp8ODUAX8hxQ5t&oh=060b0f481c566ffdfdf8e901036bf708&oe=5EA46FF5"
-  },
-  "highlights": [
-    {
-      "type": "video",
-      "publishingDate": 1578648614,
-      "url": "https://scontent-lhr3-1.cdninstagram.com/v/t50.12441-16/83117148_1501392399984542_3606743366048324393_n.mp4?_nc_ht=scontent-lhr3-1.cdninstagram.com&_nc_cat=102&_nc_ohc=hwxC3-eIne8AX_FDM5O&oe=5E235430&oh=e04fc56d31b357044a8bd93afd47e6bd"
-    },
-    {
-      "type": "video",
-      "publishingDate": 1578050618,
-      "url": "https://scontent-lhr3-1.cdninstagram.com/v/t50.12441-16/82412385_108576937200605_2584661019537851257_n.mp4?_nc_ht=scontent-lhr3-1.cdninstagram.com&_nc_cat=105&_nc_ohc=-Ir_0RhdlXoAX97jsHz&oe=5E234357&oh=8da47b7c1b8985da3833f5cc8fb963c5"
-    }
-  ],
-  "urls": {
-    "user": "http://localhost:3000/api/users/msaistanbul"
-  }
-}
-```
-
-#### Error Messages
-
-```json
-{
-  "message": "Highlight not found!",
-  "status": 404
 }
 ```

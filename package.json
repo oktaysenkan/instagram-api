@@ -4,10 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node index.js",
-    "test": "jest --coverage"
+    "build": "babel --delete-dir-on-start src --out-dir dist",
+    "test": "jest --coverage",
+    "preversion": "npm test",
+    "prepublishOnly": "npm run build",
+    "deneme": "babel-node deneme.js"
   },
-  "author": "",
+  "author": "Oktay Şenkan <oktay.senkan@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "@types/jest": "^25.2.1",
