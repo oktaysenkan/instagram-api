@@ -24,7 +24,7 @@ const getPosts = async (userId, first = 10, after = null) => {
         dimensions: node.dimensions,
         displayUrl: node.display_url,
         publishingDate: node.taken_at_timestamp,
-        videoUrl: node.video_url && node.video_url,
+        videoUrl: node.video_url,
         caption:
           node.edge_media_to_caption.edges.length > 0
             ? node.edge_media_to_caption.edges[0].node.text
