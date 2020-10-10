@@ -1,6 +1,6 @@
 {
   "name": "@oktaysenkan/instagram-api",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "publishConfig": {
     "access": "public",
@@ -15,7 +15,7 @@
     "test": "jest --coverage",
     "preversion": "npm test",
     "prepublishOnly": "npm run build",
-    "deneme": "babel-node deneme.js"
+    "deneme": "node deneme.js"
   },
   "author": "Oktay Şenkan <oktay.senkan@gmail.com>",
   "license": "ISC",
