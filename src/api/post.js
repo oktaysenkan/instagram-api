@@ -20,6 +20,8 @@ const getPosts = async (userId, first = 10, after = null) => {
 
     const result = {
       posts: media.map(({ node }) => ({
+        id: node.id,
+        shortcode: node.shortcode,
         type: node.is_video ? 'video' : 'image',
         dimensions: node.dimensions,
         displayUrl: node.display_url,
@@ -41,10 +43,9 @@ const getPosts = async (userId, first = 10, after = null) => {
 
     return Promise.resolve(result);
   } catch (error) {
-    return Promise.reject({
-      message: 'Post not found!',
-      status: 404,
-    });
+    console.log(error);
+
+    return Promise.reject(error);
   }
 };
 
